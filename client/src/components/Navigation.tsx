@@ -26,7 +26,12 @@ export default function Navigation() {
         {/* Logo */}
         <Link href="">
           <a className="flex items-center gap-2 group">
-            <div className="text-2xl font-bold text-accent">V</div>
+            <img
+              src="/logo.png"
+              alt="Vishwakarma Interior & Decorators Logo"
+              className="h-10 w-auto object-contain"
+              style={{ maxWidth: 48 }}
+            />
             <div className="hidden sm:block">
               <div className="text-sm font-semibold text-foreground">
                 Vishwakarma
@@ -78,14 +83,14 @@ export default function Navigation() {
                 </a>
               </Link>
             ))}
+              <a href="/vishwakarma-interiorDecorators.pdf" >
             <button className="w-full mt-4 px-6 py-2 border border-accent text-accent hover:bg-accent hover:text-background transition-all duration-300 text-sm font-medium">
               Brochure
               {/* add link to download /vishwakarma-interiorDecorators.pdf */} 
-              <Link href="/vishwakarma-interiorDecorators.pdf" download>
-                Download
-              </Link>
+                
 
             </button>
+              </a>
           </div>
         </div>
       )}
