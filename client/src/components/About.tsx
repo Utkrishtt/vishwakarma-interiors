@@ -29,7 +29,7 @@ export default function About() {
             <p className="text-lg text-secondary leading-relaxed">
               Vishwakarma Interior & Decorators is a distinguished design studio
               specializing in luxury interiors and architectural solutions. With
-              over four decades of expertise, we are recognized for crafting
+              over two decades of expertise, we are recognized for crafting
               bespoke spaces for clients who value refinement, detail, and
               timeless design.
             </p>
@@ -55,7 +55,7 @@ export default function About() {
 
             <div className="pt-8 border-t border-border">
               <h3 className="text-2xl font-bold text-foreground mb-3">
-                Founded in 2000s
+                Founded in 2010s
               </h3>
               <p className="text-secondary leading-relaxed">
                 Founded by Shri Rajesh Kumar Sharma, our firm has grown from a clear vision into a full-service design and build firm, creating refined spaces for luxury residential and commercial clientele.

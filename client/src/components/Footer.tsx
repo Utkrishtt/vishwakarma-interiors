@@ -17,13 +17,12 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <div className="flex items-center gap-2 mb-6">
-              <div className="text-2xl font-bold text-accent">V</div>
-              <div>
-                <div className="text-sm font-semibold text-foreground">
-                  Vishwakarma
-                </div>
-                <div className="text-xs text-secondary">Interior & Decorators</div>
-              </div>
+              <img
+                src="/logo.png"
+                alt="Vishwakarma Interior & Decorators Logo"
+                className="h-10 w-auto object-contain"
+                style={{ maxWidth: 48 }}
+              />
             </div>
             <p className="text-secondary text-sm leading-relaxed">
               Architect & Interiors Design Consultant. Creating luxury spaces
@@ -70,6 +69,12 @@ export default function Footer() {
                   >
                     +91 9871569819
                   </a>
+                  <a
+                    href="tel:+918470802035"
+                    className="block hover:text-accent transition-colors"
+                  >
+                    +91 8470802035
+                  </a>
                 </div>
               </div>
             </div>
@@ -78,19 +83,19 @@ export default function Footer() {
           {/* Locations */}
           <div>
             <h3 className="text-sm font-semibold text-foreground mb-4 tracking-widest">
-              LOCATIONS
+              LOCATION
             </h3>
-            <div className="space-y-4 text-sm text-secondary">
-              <div>
-                <p className="font-medium text-foreground mb-1">Office</p>
-                <p>K-665, Nawada Industrial Area</p>
-                <p>Uttam Nagar, New Delhi-110059</p>
-              </div>
-              <div>
-                <p className="font-medium text-foreground mb-1">Branch</p>
-                <p>I-406, Beta-II, Greater Noida</p>
-                <p>Gautam Budh Nagar, U.P.-201308</p>
-              </div>
+            <div className="rounded-lg overflow-hidden border border-border shadow">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13754.066839687732!2d77.02604875463662!3d28.61891531075132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d050009a6eb3b%3A0x4b1416755290db06!2sVishwakarma%20Interior%20%26%20Decorators!5e1!3m2!1sen!2sin!4v1769538393547!5m2!1sen!2sin"
+                width="100%"
+                height="150"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Vishwakarma Interior & Decorators Location"
+              ></iframe>
             </div>
           </div>
         </div>
