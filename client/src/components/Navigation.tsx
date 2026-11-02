@@ -1,9 +1,11 @@
-import { useState } from "react";
-import { Link } from "wouter";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [location] = useLocation();
+  const [activeSection, setActiveSection] = useState("home");
 
   const navLinks = [
     { label: "Home", href: "/" },
@@ -13,6 +15,63 @@ export default function Navigation() {
     { label: "Contact", href: "/contact" },
     { label: "Blog", href: "/blog" },
   ];
+
+  useEffect(() => {
+    if (location !== "/") {
+      setActiveSection(location.slice(1));
+      return;
+    }
+
+    const sectionIds = ["home", "about", "services", "portfolio", "contact"];
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => section !== null);
+
+    if (!("IntersectionObserver" in window) || sections.length === 0) {
+      setActiveSection("home");
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleSections = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (first, second) =>
+              first.boundingClientRect.top - second.boundingClientRect.top,
+          );
+        const currentSection = visibleSections[0]?.target.id;
+
+        if (currentSection) {
+          setActiveSection(currentSection);
+        }
+      },
+      { rootMargin: "-20% 0px -70% 0px" },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [location]);
+
+  const linkClassName = (href: string) => {
+    const isActive =
+      location === "/"
+        ? activeSection === (href === "/" ? "home" : href.slice(1))
+        : location === href;
+
+    return `text-sm font-medium transition-colors duration-300 ${
+      isActive ? "text-accent" : "text-foreground hover:text-accent"
+    }`;
+  };
+
+  const handleNavClick = (href: string) => {
+    if (href === "/" && location === "/") {
+      document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
+      setActiveSection("home");
+    }
+
+    setIsOpen(false);
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/40 backdrop-blur-sm border-b border-border">
@@ -53,10 +112,21 @@ export default function Navigation() {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-8 overflow-x-auto whitespace-nowrap">
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href}>
-              <a className="text-sm font-medium text-foreground hover:text-accent transition-colors duration-300">
+              <a
+                className={linkClassName(link.href)}
+                onClick={() => handleNavClick(link.href)}
+                aria-current={
+                  (location === "/" &&
+                    activeSection ===
+                      (link.href === "/" ? "home" : link.href.slice(1))) ||
+                  (location !== "/" && location === link.href)
+                    ? "page"
+                    : undefined
+                }
+              >
                 {link.label}
               </a>
             </Link>
@@ -80,12 +150,20 @@ export default function Navigation() {
       {/* Mobile Navigation */}
       {isOpen && (
         <div className="md:hidden border-t border-border bg-background/40">
-          <div className="container py-4 space-y-3">
+          <div className="container max-h-[calc(100dvh-5rem)] overflow-y-auto py-4 space-y-3">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}>
                 <a
-                  className="block py-2 text-sm font-medium text-foreground hover:text-accent transition-colors"
-                  onClick={() => setIsOpen(false)}
+                  className={`block py-2 ${linkClassName(link.href)}`}
+                  aria-current={
+                    (location === "/" &&
+                      activeSection ===
+                        (link.href === "/" ? "home" : link.href.slice(1))) ||
+                    (location !== "/" && location === link.href)
+                      ? "page"
+                      : undefined
+                  }
+                  onClick={() => handleNavClick(link.href)}
                 >
                   {link.label}
                 </a>

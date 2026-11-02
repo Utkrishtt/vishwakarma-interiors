@@ -15,6 +15,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <Hero
+        id="home"
         title="Elegant, Refined, Iconic"
         subtitle="Where your dreams meet elegant design."
         backgroundImage="/images/hero-main.jpg"

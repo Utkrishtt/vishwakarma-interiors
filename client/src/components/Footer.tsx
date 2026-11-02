@@ -26,7 +26,7 @@ export default function Footer() {
             </div>
             <p className="text-secondary text-sm leading-relaxed">
               Architect & Interiors Design Consultant. Creating luxury spaces
-              since 2000s.
+              since 2010s.
             </p>
           </div>
 

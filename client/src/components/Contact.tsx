@@ -53,7 +53,10 @@ export default function Contact() {
   };
 
   return (
-    <section className="py-24 sm:py-32 lg:py-40 bg-background">
+    <section
+      id="contact"
+      className="scroll-mt-20 py-24 sm:py-32 lg:py-40 bg-background"
+    >
       <div className="container">
         {/* Section Header */}
         <div className="mb-16 sm:mb-24 max-w-2xl">
