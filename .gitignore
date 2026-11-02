@@ -7,7 +7,7 @@ dist/
 build/
 *.dist
 
-# Environment files
+# Environment files - never commit
 .env
 .env.*
 !.env.example
