@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "wouter";
+import automatedPosts from "@/data/blog-posts.json";
 
 const blogPosts = [
 	{
@@ -116,7 +118,20 @@ retreats.
 	},
 ];
 
+type AutomatedPost = {
+	slug: string;
+	title: string;
+	date: string;
+	image?: string;
+	imageAlt?: string;
+	excerpt?: string;
+	draft?: boolean;
+};
+
 export default function Blog() {
+	const newPosts = (automatedPosts as unknown as AutomatedPost[]).filter(
+		(post) => !post.draft,
+	);
 	return (
 		<section className="min-h-screen bg-background py-20 px-4">
 			<div className="max-w-5xl mx-auto">
@@ -134,6 +149,42 @@ export default function Blog() {
 
 				{/* Blog List */}
 				<div className="space-y-16">
+					{newPosts.map((post) => (
+						<article
+							key={post.slug}
+							className="bg-white rounded-xl shadow border border-border overflow-hidden"
+						>
+							{post.image ? (
+								<div className="h-[220px] md:h-[320px] w-full">
+									<img
+										src={post.image}
+										alt={post.imageAlt || post.title}
+										className="w-full h-full object-cover"
+										loading="lazy"
+									/>
+								</div>
+							) : null}
+							<div className="p-6 md:p-10">
+								<h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-2">
+									<Link href={`/blog/${post.slug}`}>{post.title}</Link>
+								</h2>
+								<div className="text-xs text-accent mb-4">
+									{new Date(post.date).toLocaleDateString("en-IN", {
+										day: "numeric",
+										month: "long",
+										year: "numeric",
+									})}
+								</div>
+								<p className="text-gray-800 leading-7 mb-4">{post.excerpt}</p>
+								<Link
+									href={`/blog/${post.slug}`}
+									className="text-accent underline text-sm"
+								>
+									Read more
+								</Link>
+							</div>
+						</article>
+					))}
 					{blogPosts.map((post) => (
 						<article
 							key={post.id}
